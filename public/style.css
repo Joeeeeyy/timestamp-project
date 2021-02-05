@@ -33,8 +33,10 @@ hr {
 }
 
 code {
+	border: black;
+	border-radius: 5px;
   font-family: monospace;
-  padding: 2px;
+  padding: 5px;
   color: black;
   background-color: #8395a7;
 }
