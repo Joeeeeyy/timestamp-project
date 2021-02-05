@@ -31,9 +31,14 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-let resObj = {};
+let dateObj = {};
 
-app.get('/api/timestamp/:input', (req, res) => {
-  let input = req.params.input
-  res.json(input)
+app.get('/api/timestamp/:date_string', (req, res) => {
+  let dateString = req.params.date_string
+
+  if(dateString.includes('-')) {
+    dateObj['unix'] = new Date(input).getTime()
+  }
+
+  res.json(dateObj)
 })
