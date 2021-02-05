@@ -31,31 +31,30 @@ let listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-let dateObj = {};
+/** My Solution */
 
-app.get('/api/timestamp/:date_string', (req, res) => {
-  let dateString = req.params.date_string;
- 
-  if(dateString.includes('-')) {
-    dateObj['unix'] = new Date(dateString).getTime();
-    dateObj['utc'] = new Date(dateString).toUTCString();
+app.get("/api/timestamp/:date_string", (req, res) => {
+  let dateStr = req.params.date_string;
+
+  if (/\d{5,}/.test(dateStr)) {
+    let dateInt = parseInt(dateStr);
+
+    res.json({
+      unix: dateStr, 
+      utc: new Date(dateInt).toUTCString()
+    });
   } else {
-    dateString = parseInt(dateString);
+    let dateObj = new Date(dateStr);
 
-    dateObj['unix'] = new Date(dateString).getTime();
-    dateObj['utc'] = new Date(dateString).toUTCString();
-  };
-
-  if(!dateObj['unix'] || !dateObj['utc']) {
-    res.json({error: 'Invalid Date'});
-  };
-
-  res.json(dateObj);
-});
-
-app.get('/api/timestamp', (res, req) => {
-  dateObj['unix'] = new Date().getTime();
-  dateObj['utc'] = new Date().toUTCString();
-
-  res.json(dateObj);
+    if (dateObj.toString() === "Invalid Date") {
+      res.json({
+        error: "Invalid Date"
+      });
+    } else {
+      res.json({
+        unix: dateObj.valueOf(),
+        utc: dateObj.toUTCString()
+      });
+    }
+  }
 });
