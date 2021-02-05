@@ -1,7 +1,8 @@
 {
-	"name": "fcc-api-projects-boilerplate",
+	"name": "fcc-timestamp-project",
+	"author": "Jose Guillermo Lopez",
 	"version": "0.0.1",
-	"description": "An FCC Backend Challenge",
+	"description": "FCC Timestamp Project",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
