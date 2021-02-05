@@ -33,12 +33,20 @@ let listener = app.listen(process.env.PORT, function () {
 
 let dateObj = {}
 
-app.get('/api/timestamp/:input', (req, res) => {
-  let input = req.params.input
+app.get('/api/timestamp/:date_string', (req, res) => {
+  let dateString = req.params.date_string
+ 
+  if(dateString.includes('-')) {
+    dateObj['unix'] = new Date(dateString).getTime()
+    dateObj['utc'] = new Date(dateString).toUTCString()
+  } else {
+    dateString = parseInt(dateString)
 
-  if(input.includes('-')) {
-    dateObj['unix'] = new Date(input).getTime()
+    dateObj['unix'] = new Date(dateString).getTime()
   }
 
+  if(!dateObj['unix']) {
+    res.json({error: 'Invalid Date'})
+  }
   res.json(dateObj)
 })
