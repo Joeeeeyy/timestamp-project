@@ -3,8 +3,8 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #222;
-	background-color: #FaFaFa;
+	color: #c8d6e5;
+	background-color: #222f3e;
 	text-align: center;
 	line-height: 1.4em;
 }
@@ -16,10 +16,12 @@ body {
 
 h3 {
   margin-top: 30px;
+  color: #10ac84;
 }
 
 hr {
 	margin: 25px;
+	color: #576574;
 }
 
 .footer {
